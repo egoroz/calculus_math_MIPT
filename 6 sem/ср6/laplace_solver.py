@@ -31,9 +31,6 @@ def solve():
     tolerance = max(epsilon, 1e-15)
 
     max_iter = 100000
-    iter_count = 0
-    converged = False
-
     for iter_count in range(max_iter):
         max_diff = 0.0
 
@@ -45,16 +42,12 @@ def solve():
                 max_diff = max(max_diff, abs(u[j, i] - u_old))
 
         if max_diff < tolerance:
-            converged = True
             break
-
-    if not converged:
-         print(f"Warning: Maximum iterations ({max_iter}) reached. Max diff = {max_diff:.4E}", file=sys.stderr)
 
 
     interior_points = u[1:M, 1:M]
     output_values = interior_points.flatten()
-    output_string = " ".join(f"{val:.10f}" for val in output_values)
+    output_string = " ".join(f"{val:.15f}" for val in output_values)
     print(output_string)
 
 if __name__ == "__main__":
